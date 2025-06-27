@@ -1,0 +1,255 @@
+/* Star Wars Bounty Forum Styles */
+:root {
+  --primary: #ffe81f; /* Star Wars yellow */
+  --background: #000000;
+  --foreground: #ffffff;
+  --accent: #ff4500;
+  --font-heading: 'Orbitron', sans-serif;
+  --font-body: 'Roboto', sans-serif;
+}
+
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Star field background */
+.stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://firebasestorage.googleapis.com/v0/b/public-assets-2025.appspot.com/o/starfield.png?alt=media') repeat center center;
+  background-size: contain;
+  z-index: -1;
+  opacity: 0.4;
+}
+
+/* Header */
+.main-header {
+  text-align: center;
+  padding: 2rem 0 1rem;
+}
+
+.site-title {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  color: var(--primary);
+  letter-spacing: 0.15rem;
+  margin-bottom: 0.2rem;
+}
+
+.aurebesh {
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: var(--foreground);
+  margin-right: 0.4rem;
+}
+
+.tagline {
+  font-size: 0.9rem;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+/* Tabs */
+.tab-navigation {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  background: transparent;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  font-family: var(--font-heading);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.tab-btn:hover,
+.tab-btn.active {
+  background: var(--primary);
+  color: var(--background);
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Bounty Grid */
+.bounty-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--primary);
+}
+
+.card h3 {
+  font-family: var(--font-heading);
+  margin-bottom: 0.5rem;
+}
+
+.card .reward {
+  color: var(--accent);
+  font-weight: 700;
+  margin-top: 0.5rem;
+}
+
+/* Forms */
+.bounty-form .form-group {
+  margin-bottom: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 1rem;
+  border-radius: 6px;
+}
+
+.bounty-form legend {
+  font-family: var(--font-heading);
+  color: var(--primary);
+  padding: 0 0.3rem;
+}
+
+.bounty-form .form-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.8rem;
+}
+
+.bounty-form label {
+  font-size: 0.85rem;
+  margin-bottom: 0.2rem;
+}
+
+.bounty-form input,
+.bounty-form select,
+.bounty-form textarea {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: var(--foreground);
+  padding: 0.5rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.bounty-form input:focus,
+.bounty-form select:focus,
+.bounty-form textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.7rem;
+}
+
+.btn {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  font-family: var(--font-heading);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: var(--background);
+}
+
+.btn-primary:hover {
+  background: var(--accent);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+
+/* Footer */
+.main-footer {
+  margin-top: auto;
+  text-align: center;
+  padding: 1.5rem 0 2rem;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+/* Modal */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.7);
+}
+
+.modal-content {
+  background-color: #1a1a1a;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 6px;
+  color: var(--foreground);
+}
+
+.close {
+  color: var(--primary);
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #fff;
+}

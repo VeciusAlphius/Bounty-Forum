@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galactic Bounty Registry - Star Wars Roleplay</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="stars"></div>
+
+    <header class="main-header">
+        <div class="container">
+            <h1 class="site-title">
+                <span class="aurebesh">GALACTIC</span>
+                BOUNTY REGISTRY
+            </h1>
+            <p class="tagline">Official Imperial Bounty Board - Outer Rim Division</p>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <!-- Navigation Tabs -->
+            <nav class="tab-navigation">
+                <button class="tab-btn active" data-tab="browse">Browse Bounties</button>
+                <button class="tab-btn" data-tab="post">Post New Bounty</button>
+                <button class="tab-btn" data-tab="claimed">My Claims</button>
+            </nav>
+
+            <!-- Browse Bounties Tab -->
+            <section id="browse-tab" class="tab-content active">
+                <div class="filters-section">
+                    <h2>Active Bounties</h2>
+                    <div class="filter-controls">
+                        <select id="difficulty-filter">
+                            <option value="all">All Difficulties</option>
+                            <option value="easy">Easy</option>
+                            <option value="moderate">Moderate</option>
+                            <option value="hard">Hard</option>
+                            <option value="extreme">Extreme</option>
+                        </select>
+                        <select id="reward-filter">
+                            <option value="all">All Rewards</option>
+                            <option value="low">Under 5,000 Credits</option>
+                            <option value="medium">5,000 - 25,000 Credits</option>
+                            <option value="high">Over 25,000 Credits</option>
+                        </select>
+                        <input type="text" id="search-filter" placeholder="Search by target name or species...">
+                    </div>
+                </div>
+
+                <div id="bounty-grid" class="bounty-grid">
+                    <!-- Bounties will be populated here -->
+                </div>
+
+                <div id="no-bounties" class="no-bounties" style="display: none;">
+                    <div class="empty-state">
+                        <h3>No Active Bounties</h3>
+                        <p>The galaxy is quiet... for now. Check back later or post a new bounty.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Post New Bounty Tab -->
+            <section id="post-tab" class="tab-content">
+                <div class="form-section">
+                    <h2>Submit New Bounty</h2>
+                    <form id="bounty-form" class="bounty-form">
+                        <!-- Issuer Information -->
+                        <fieldset class="form-group">
+                            <legend>Issuer Information</legend>
+                            <div class="form-row">
+                                <div class="form-field">
+                                    <label for="issuer-name">Issuer Name*</label>
+                                    <input type="text" id="issuer-name" name="issuer-name" required 
+                                           placeholder="Your character or organization name" maxlength="50">
+                                </div>
+                                <div class="form-field">
+                                    <label for="issuer-contact">Contact Method*</label>
+                                    <input type="text" id="issuer-contact" name="issuer-contact" required 
+                                           placeholder="HoloNet frequency, cantina location, etc." maxlength="100">
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <!-- Target Information -->
+                        <fieldset class="form-group">
+                            <legend>Target Details</legend>
+                            <div class="form-row">
+                                <div class="form-field">
+                                    <label for="target-name">Target Name*</label>
+                                    <input type="text" id="target-name" name="target-name" required 
+                                           placeholder="Full name or alias" maxlength="50">
+                                </div>
+                                <div class="form-field">
+                                    <label for="target-species">Species*</label>
+                                    <select id="target-species" name="target-species" required>
+                                        <option value="">Select Species</option>
+                                        <option value="Human">Human</option>
+                                        <option value="Twi'lek">Twi'lek</option>
+                                        <option value="Rodian">Rodian</option>
+                                        <option value="Wookiee">Wookiee</option>
+                                        <option value="Bothan">Bothan</option>
+                                        <option value="Corellian">Corellian</option>
+                                        <option value="Zabrak">Zabrak</option>
+                                        <option value="Chiss">Chiss</option>
+                                        <option value="Mandalorian">Mandalorian</option>
+                                        <option value="Hutt">Hutt</option>
+                                        <option value="Unknown">Unknown</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-field">
+                                <label for="target-location">Last Known Location*</label>
+                                <select id="target-location" name="target-location" required>
+                                    <option value="">Select Location</option>
+                                    <option value="Tatooine">Tatooine</option>
+                                    <option value="Coruscant">Coruscant</option>
+                                    <option value="Naboo">Naboo</option>
+                                    <option value="Hoth">Hoth</option>
+                                    <option value="Endor">Endor</option>
+                                    <option value="Kamino">Kamino</option>
+                                    <option value="Geonosis">Geonosis</option>
+                                    <option value="Mustafar">Mustafar</option>
+                                    <option value="Dagobah">Dagobah</option>
+                                    <option value="Alderaan">Alderaan</option>
+                                    <option value="Bespin">Bespin</option>
+                                    <option value="Jakku">Jakku</option>
+                                    <option value="Kessel">Kessel</option>
+                                    <option value="Ryloth">Ryloth</option>
+                                    <option value="Unknown">Unknown System</option>
+                                </select>
+                            </div>
+                            <div class="form-field">
+                                <label for="target-description">Physical Description</label>
+                                <textarea id="target-description" name="target-description" 
+                                          placeholder="Height, build, distinguishing features, clothing, etc." 
+                                          maxlength="500" rows="3"></textarea>
+                            </div>
+                        </fieldset>
+
+                        <!-- Contract Details -->
+                        <fieldset class="form-group">
+                            <legend>Contract Specifications</legend>
+                            <div class="form-row">
+                                <div class="form-field">
+                                    <label for="bounty-type">Bounty Type*</label>
+                                    <select id="bounty-type" name="bounty-type" required>
+                                        <option value="">Select Type</option>
+                                        <option value="Alive">Wanted Alive</option>
+                                        <option value="Dead or Alive">Dead or Alive</option>
+                                        <option value="Information Only">Information Only</option>
+                                        <option value="Capture">Capture Mission</option>
+                                        <option value="Elimination">Elimination</option>
+                                    </select>
+                                </div>
+                                <div class="form-field">
+                                    <label for="difficulty">Difficulty Rating*</label>
+                                    <select id="difficulty" name="difficulty" required>
+                                        <option value="">Select Difficulty</option>
+                                        <option value="Easy">Easy - Low Risk</option>
+                                        <option value="Moderate">Moderate - Some Risk</option>
+                                        <option value="Hard">Hard - High Risk</option>
+                                        <option value="Extreme">Extreme - Lethal</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-field">
+                                    <label for="reward-amount">Reward Amount*</label>
+                                    <input type="number" id="reward-amount" name="reward-amount" required 
+                                           min="1" max="1000000" placeholder="Credit amount">
+                                </div>
+                                <div class="form-field">
+                                    <label for="deadline">Deadline</label>
+                                    <input type="date" id="deadline" name="deadline" 
+                                           min="2024-01-01" max="2030-12-31">
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <!-- Background Information -->
+                        <fieldset class="form-group">
+                            <legend>Mission Background</legend>
+                            <div class="form-field">
+                                <label for="crime-details">Crime/Reason for Bounty*</label>
+                                <textarea id="crime-details" name="crime-details" required
+                                          placeholder="What did the target do? Why is there a bounty?" 
+                                          maxlength="1000" rows="4"></textarea>
+                            </div>
+                            <div class="form-field">
+                                <label for="special-requirements">Special Requirements</label>
+                                <textarea id="special-requirements" name="special-requirements"
+                                          placeholder="Any specific conditions, restrictions, or bonus objectives" 
+                                          maxlength="500" rows="3"></textarea>
+                            </div>
+                        </fieldset>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Submit Bounty</button>
+                            <button type="reset" class="btn btn-secondary">Clear Form</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- My Claims Tab -->
+            <section id="claimed-tab" class="tab-content">
+                <div class="claims-section">
+                    <h2>My Active Claims</h2>
+                    <div id="claimed-bounties" class="bounty-grid">
+                        <!-- Claimed bounties will be populated here -->
+                    </div>
+                    <div id="no-claims" class="no-bounties">
+                        <div class="empty-state">
+                            <h3>No Active Claims</h3>
+                            <p>You haven't claimed any bounties yet. Browse available bounties to get started.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Bounty Detail Modal -->
+    <div id="bounty-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modal-body">
+                <!-- Bounty details will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; Galactic Empire - Bounty Hunter Guild Division</p>
+            <p class="disclaimer">Remember: Dead men tell no tales, but live ones pay better.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
